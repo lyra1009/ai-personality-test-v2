@@ -298,14 +298,6 @@ body::before {
       <div class="guide-title">📈 成长建议</div>
       <div class="guide-content" id="guide-content"></div>
     </div>
-    <!-- 用户信息收集 -->
-    <div class="user-info-card" style="background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow-card)">
-      <div style="font-size:13px;color:var(--text-muted);letter-spacing:2px;margin-bottom:16px;text-align:center;">📝 记录你的测评结果（可选）</div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <input type="text" id="user-name" placeholder="请输入你的姓名" style="padding:12px 16px;background:#fffafb;border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;outline:none;transition:all 0.3s;" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px var(--accent-glow)'" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-        <input type="text" id="user-dept" placeholder="请输入你的部门（可选）" style="padding:12px 16px;background:#fffafb;border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;outline:none;transition:all 0.3s;" onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='0 0 0 3px var(--accent-glow)'" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-      </div>
-    </div>
 
     <div class="result-actions">
       <button class="btn-primary" onclick="submitToSurvey()">📋 提交结果 · 自动复制到问卷</button>
@@ -1084,23 +1076,12 @@ function submitToSurvey() {
   if (!window._resultData) return;
   const { code, personality, scores } = window._resultData;
   
-  // 获取用户填写的姓名和部门
-  const userName = document.getElementById('user-name')?.value?.trim() || '未填写';
-  const userDept = document.getElementById('user-dept')?.value?.trim() || '未填写';
-  
   // 生成结果摘要
   const summary = [
     '【AI应用人格测评结果】',
-    '姓名：' + userName,
-    '部门：' + userDept,
     '人格代码：' + code,
     '人格类型：' + personality.name,
-    '适配指数：' + '⭐'.repeat(personality.stars) + '（' + personality.stars + '/5）',
-    '一句话：' + personality.tagline,
-    'IP（直觉共情）：' + scores.IP.winner + ' ' + Math.round(scores.IP.avgScore * 10) / 10 + '分',
-    'SD（系统建构）：' + scores.SD.winner + ' ' + Math.round(scores.SD.avgScore * 10) / 10 + '分',
-    'EF（效率驱动）：' + scores.EF.winner + ' ' + Math.round(scores.EF.avgScore * 10) / 10 + '分',
-    'AC（自主协作）：' + scores.AC.winner + ' ' + Math.round(scores.AC.avgScore * 10) / 10 + '分'
+    '一句话：' + personality.tagline
   ].join('\n');
   
   // 复制到剪贴板
@@ -1132,4 +1113,5 @@ console.log('📋 提交结果将跳转到小易问卷');
 </script>
 </body>
 </html>
+
 
